@@ -1,7 +1,7 @@
 # Learnig Go
 
 ## Install Go
-1.   download the version you want
+1.   download the version you want from go.dev/learn
 2.   make sure you remove the one you have before by deleting the go directory in your /usr/local
 `sudo rm -rf /usr/local/go`
 3.   extract the archive you just downloaded into /usr/local, this will create a fresh go directory
