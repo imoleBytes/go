@@ -157,5 +157,114 @@ the data types of the parameters must be given
 
     func birthage( age *int){
         *age++
-    }```
+    }
+```
  
+## init function
+    this function always run before the program or script starts
+    there can be multiple init() fuction in a file
+
+    uually used for initalizing configs in a large program
+
+## panic
+    panic is like raise or throwing an error. it stops the program
+
+```go
+    panic("Throwing an error")
+
+```
+
+## defer
+ defer statement run just before a function ends
+ even if the statement is first stated, it will run after every statement in the block or block within is at the end
+
+ you can use multiple defer statementsin the LIFO or FILO manner
+
+## Error 
+    there is no exceptions in go, errors are to be passed around as values and handled by checking if error is nil or not. its a design pattern
+
+    ```go
+        func readUser(id int) (user, err) {
+            // fetch user
+            if ok {
+                return user, nil
+            }  else {
+                return nil, error
+            }
+        }
+
+        user, err := readUser(20)
+        if err != nil {
+            // handle error
+            panic("error occur", err)
+        }
+        // work with user data
+    ```
+
+## Control structures
+    -   if-else
+    -   switch
+    -   for (used for all loops type)
+ ### If
+ just like in other language
+ here you can initalie variable and then check the condition
+ ```go
+    if true {
+        // work
+    } if else {
+        // multiple conditioon to be checked
+    } else {
+        // if all conditions failed
+    }
+
+    if msg := "hello"; user != nil {
+        print(msg, user.name)
+    }
+```
+### switch
+    no break is needed like javascript, fallthrough can be used to match more than one cases together
+```go
+    switch day {
+        case "Monday":
+            print("its monday")
+        case "Saturday":
+            fallthrough
+        case "Sunday":
+            print("its weekend")
+        default:
+            print("Its another woring day")
+    }
+```
+day can also be roemoved, and then the cases expect statement that can resolve to bool
+
+### for loop
+The normal for loop
+```go
+    // normal for looop
+    for i:=0; i<5; i++ {
+        // iterate
+    }
+
+    // for range, similar to for in javascript, where every iteration is the index and not the value of the element itself
+    for index:= range collection {
+        // index is the index
+    } 
+
+    // for range getting both index and value
+    for key, value := range map {
+        // key is index, value is the value
+    }
+
+    // while loop
+    endgame := true
+    for endgame {
+        // loops unless a break is encountered
+    }
+    
+    for age < 10 {
+        // loops unless a break is encountered or condition becomes false
+    }
+    // infinite loop
+    for {
+        // run till it breaks
+    }
