@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/csv"
 	"os"
+	"strings"
 )
 
-func readCSV(csv_file string) ([][]string, error) {
+func readCSV(csv_file string) ([]problem, error) {
 
 	file, err := os.Open(csv_file)
 
@@ -20,5 +21,22 @@ func readCSV(csv_file string) ([][]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	return records, nil
+
+	total := len(records)
+
+	problems := make([]problem, total)
+
+	for index, record := range records {
+		problems[index] = problem{
+			que: strings.TrimSpace(record[0]),
+			ans: strings.TrimSpace(record[1]),
+		}
+	}
+
+	return problems, nil
+}
+
+type problem struct {
+	que string
+	ans string
 }
