@@ -14,7 +14,7 @@ func main() {
 
 	flag.Parse()
 
-	records, err := utils.ReadCSV(*csvfile)
+	records, err := readCSV(*csvfile)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

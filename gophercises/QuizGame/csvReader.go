@@ -1,11 +1,11 @@
-package utils
+package main
 
 import (
 	"encoding/csv"
 	"os"
 )
 
-func ReadCSV(csv_file string) ([][]string, error) {
+func readCSV(csv_file string) ([][]string, error) {
 
 	file, err := os.Open(csv_file)
 
