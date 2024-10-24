@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -21,10 +22,30 @@ func main() {
 	}
 	total := len(records)
 
-	score := 0
+	var score int = 0
 	done := make(chan bool)
 	answerch := make(chan bool)
 	var user_answer string
+
+	var play string
+
+	for {
+		fmt.Println("Questions Ready! Are you ready to play? (Y/N) ")
+		fmt.Scanf("%s\n", &play)
+
+		play = strings.ToLower(play)
+		if play == "n" {
+			fmt.Println("You missing out!, Bye")
+			os.Exit(0)
+		} else if play != "y" {
+			fmt.Println("Invalid response!: Enter either y or n")
+		} else {
+			fmt.Printf("You have %v seconds, make it count! ENTER to START", *limit)
+			fmt.Scanln()
+			break
+		}
+
+	}
 
 	go sleepfor(*limit, done)
 
