@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/csv"
-	"errors"
 	"os"
 )
 
@@ -11,8 +10,9 @@ func ReadCSV(csv_file string) ([][]string, error) {
 	file, err := os.Open(csv_file)
 
 	if err != nil {
-		return nil, errors.New("error openinf file o")
+		return nil, err
 	}
+	defer file.Close()
 
 	reader := csv.NewReader(file)
 

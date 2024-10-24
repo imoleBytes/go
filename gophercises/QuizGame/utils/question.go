@@ -8,7 +8,7 @@ func Ask(num int, question, answer string) int {
 	var user_answer string
 
 	fmt.Printf("Problem #%v: %v = ", num, question)
-	fmt.Scanln(&user_answer)
+	fmt.Scanf("%s\n", &user_answer)
 
 	if user_answer == answer {
 		return 1
