@@ -6,11 +6,13 @@ import (
 	"gophercises/quizGame/utils"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
 
 	csvfile := flag.String("file", "problems.csv", "path to csv file, USAGE: -file=test.csv")
+	limit := flag.Int("limit", 10, "The time limit for the quiz in seconds, USAGE: -limit=5")
 
 	flag.Parse()
 
@@ -22,14 +24,32 @@ func main() {
 
 	total := len(records)
 
+	donech := make(chan bool)
 	score := 0
-	for index := range records {
-		record := records[index]
+	go func(done chan bool) {
 
-		que := record[0]
-		ans := strings.TrimSpace(record[1])
+	outer:
+		for index := range records {
+			select {
+			case <-done:
+				break outer
+			default:
+				record := records[index]
 
-		score += utils.Ask(index+1, que, ans)
-	}
+				que := record[0]
+				ans := strings.TrimSpace(record[1])
+
+				score += utils.Ask(index+1, que, ans)
+			}
+
+		}
+	}(donech)
+	sleepfor(*limit, donech)
+
 	fmt.Printf("You scored %v out of %v.\n", score, total)
+}
+
+func sleepfor(t int, done chan bool) {
+	time.Sleep(time.Duration(t) * time.Second)
+	done <- true
 }
